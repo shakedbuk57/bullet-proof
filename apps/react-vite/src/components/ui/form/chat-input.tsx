@@ -77,7 +77,7 @@ const ChatInput = React.forwardRef<HTMLDivElement, ChatInputProps>(
       <div
         ref={ref}
         className={cn(
-          'flex flex-col gap-3 rounded-lg border border-input bg-card p-4 shadow-md',
+          'flex flex-col gap-3 rounded-lg border-0 bg-gray-800 p-3 shadow-md',
           disabled && 'opacity-50',
           className,
         )}
@@ -92,7 +92,7 @@ const ChatInput = React.forwardRef<HTMLDivElement, ChatInputProps>(
           disabled={disabled || isLoading}
           maxLength={maxLength}
           className={cn(
-            'flex min-h-[60px] max-h-[200px] w-full resize-none rounded-md border border-input bg-transparent px-3 py-2 text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50',
+            'flex min-h-[60px] max-h-[200px] w-full resize-none rounded-md border-0 bg-[#3a3f4a] px-3 py-2 text-sm text-gray-100 placeholder:text-gray-500 focus-visible:outline-none focus-visible:ring-0 disabled:cursor-not-allowed disabled:opacity-50',
           )}
         />
 
@@ -166,7 +166,7 @@ const ChatInput = React.forwardRef<HTMLDivElement, ChatInputProps>(
             isLoading={isLoading}
             aria-label="Send message"
             title="Send message"
-            className="rounded-full"
+            className="rounded-full bg-[#FF5A4A] hover:bg-[#FF6B5A] text-white"
           >
             {!isLoading && <ArrowUp className="size-5" />}
           </Button>
