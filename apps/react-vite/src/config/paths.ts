@@ -38,6 +38,10 @@ export const paths = {
       path: 'users',
       getHref: () => '/app/users',
     },
+    teams: {
+      path: 'teams',
+      getHref: () => '/app/teams',
+    },
     profile: {
       path: 'profile',
       getHref: () => '/app/profile',

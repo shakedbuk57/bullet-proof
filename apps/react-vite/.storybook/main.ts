@@ -9,6 +9,7 @@ module.exports = {
     '@storybook/addon-interactions',
     '@storybook/addon-docs',
     '@storybook/addon-a11y',
+    'msw-storybook-addon',
   ],
   framework: {
     name: '@storybook/react-vite',
@@ -20,4 +21,5 @@ module.exports = {
   typescript: {
     reactDocgen: 'react-docgen-typescript',
   },
+  staticDirs: ['../public'],
 };

@@ -2,26 +2,41 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 
 import { api } from '@/lib/api-client';
 import { QueryConfig } from '@/lib/react-query';
-import { Team } from '@/types/api';
+import { Meta, Team } from '@/types/api';
 
-export const getTeams = (): Promise<{ data: Team[] }> => {
-  return api.get('/teams');
+export const getTeams = (
+  page = 1,
+): Promise<{
+  data: Team[];
+  meta: Meta;
+}> => {
+  return api.get(`/teams`, {
+    params: {
+      page,
+    },
+  });
 };
 
-export const getTeamsQueryOptions = () => {
+export const getTeamsQueryOptions = ({
+  page,
+}: { page?: number } = {}) => {
   return queryOptions({
-    queryKey: ['teams'],
-    queryFn: () => getTeams(),
+    queryKey: page ? ['teams', { page }] : ['teams'],
+    queryFn: () => getTeams(page),
   });
 };
 
 type UseTeamsOptions = {
+  page?: number;
   queryConfig?: QueryConfig<typeof getTeamsQueryOptions>;
 };
 
-export const useTeams = ({ queryConfig = {} }: UseTeamsOptions = {}) => {
+export const useTeams = ({
+  queryConfig,
+  page,
+}: UseTeamsOptions = {}) => {
   return useQuery({
-    ...getTeamsQueryOptions(),
+    ...getTeamsQueryOptions({ page }),
     ...queryConfig,
   });
 };
