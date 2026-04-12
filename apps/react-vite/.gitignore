@@ -38,3 +38,5 @@ yarn-error.log*
 # local
 mocked-db.json
 
+
+*storybook.log
