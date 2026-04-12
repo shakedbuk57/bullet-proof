@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/react-vite';
 import { HttpResponse, http } from 'msw';
-import { OrganizationSettings } from './organization-settings';
-import { Project } from '../types';
+
+import { env } from '@/config/env';
+import { Project } from '@/features/organization/types';
 
 const mockProjects = (organizationId: string): Project[] => [
   {
@@ -46,34 +46,8 @@ const mockProjects = (organizationId: string): Project[] => [
   },
 ];
 
-const meta: Meta<typeof OrganizationSettings> = {
-  title: 'Features/Organization/OrganizationSettings',
-  component: OrganizationSettings,
-  parameters: {
-    layout: 'fullscreen',
-    msw: {
-      handlers: [
-        http.get('https://api.bulletproofapp.com/organizations/:organizationId/projects', ({ params }) => {
-          return HttpResponse.json({ data: mockProjects(params.organizationId as string) });
-        }),
-      ],
-    },
-  },
-};
-
-export default meta;
-type Story = StoryObj<typeof OrganizationSettings>;
-
-export const Default: Story = {
-  args: {
-    organizationId: 'org-123',
-    organizationName: 'Spark Team',
-  },
-};
-
-export const WithLongOrganizationName: Story = {
-  args: {
-    organizationId: 'org-456',
-    organizationName: 'Very Long Organization Name That Spans Multiple Words',
-  },
-};
+export const projectsHandlers = [
+  http.get(`${env.API_URL}/organizations/:organizationId/projects`, ({ params }) => {
+    return HttpResponse.json({ data: mockProjects(params.organizationId) });
+  }),
+];
