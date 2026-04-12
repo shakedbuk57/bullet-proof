@@ -1,18 +1,23 @@
-module.exports = {
-  stories: ['../src/**/*.stories.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+import type { StorybookConfig } from '@storybook/react-vite';
+import viteTsconfigPaths from 'vite-tsconfig-paths';
 
+const config: StorybookConfig = {
+  stories: ['../src/**/*.stories.@(js|jsx|ts|tsx)'],
   addons: [
     '@storybook/addon-actions',
     '@storybook/addon-links',
-    '@storybook/node-logger',
     '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-    '@storybook/addon-docs',
     '@storybook/addon-a11y',
+    'msw-storybook-addon',
   ],
   framework: {
     name: '@storybook/react-vite',
-    options: {},
+    options: {
+      viteFinal: (config) => {
+        config.plugins?.push(viteTsconfigPaths());
+        return config;
+      },
+    },
   },
   docs: {
     autodocs: 'tag',
@@ -21,3 +26,5 @@ module.exports = {
     reactDocgen: 'react-docgen-typescript',
   },
 };
+
+export default config;

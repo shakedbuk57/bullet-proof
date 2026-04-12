@@ -5,11 +5,12 @@ import { api } from '@/lib/api-client';
 import { MutationConfig } from '@/lib/react-query';
 import { Discussion } from '@/types/api';
 
-import { getDiscussionQueryOptions } from './get-discussion';
+import { getDiscussionsQueryOptions } from './get-discussions';
 
 export const updateDiscussionInputSchema = z.object({
   title: z.string().min(1, 'Required'),
   body: z.string().min(1, 'Required'),
+  status: z.enum(['Backlog', 'In Progress', 'Done']).optional(),
 });
 
 export type UpdateDiscussionInput = z.infer<typeof updateDiscussionInputSchema>;
@@ -20,7 +21,7 @@ export const updateDiscussion = ({
 }: {
   data: UpdateDiscussionInput;
   discussionId: string;
-}): Promise<Discussion> => {
+}): Promise<{ data: Discussion }> => {
   return api.patch(`/discussions/${discussionId}`, data);
 };
 
@@ -36,11 +37,11 @@ export const useUpdateDiscussion = ({
   const { onSuccess, ...restConfig } = mutationConfig || {};
 
   return useMutation({
-    onSuccess: (data, ...args) => {
+    onSuccess: (response, ...args) => {
       queryClient.refetchQueries({
-        queryKey: getDiscussionQueryOptions(data.id).queryKey,
+        queryKey: getDiscussionsQueryOptions().queryKey,
       });
-      onSuccess?.(data, ...args);
+      onSuccess?.(response, ...args);
     },
     ...restConfig,
     mutationFn: updateDiscussion,

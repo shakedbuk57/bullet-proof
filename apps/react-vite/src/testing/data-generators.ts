@@ -44,6 +44,7 @@ const generateDiscussion = () => ({
   id: randUuid(),
   title: randCatchPhrase(),
   body: randParagraph(),
+  status: 'Backlog' as const,
   createdAt: Date.now(),
 });
 

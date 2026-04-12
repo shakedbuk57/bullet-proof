@@ -13,6 +13,7 @@ import {
 type DiscussionBody = {
   title: string;
   body: string;
+  status?: 'Backlog' | 'In Progress' | 'Done';
 };
 
 export const discussionsHandlers = [
@@ -143,6 +144,7 @@ export const discussionsHandlers = [
       const result = db.discussion.create({
         teamId: user?.teamId,
         authorId: user?.id,
+        status: 'Backlog',
         ...data,
       });
       await persistDb('discussion');

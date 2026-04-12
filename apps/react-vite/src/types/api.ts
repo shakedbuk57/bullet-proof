@@ -41,6 +41,7 @@ export type Discussion = Entity<{
   body: string;
   teamId: string;
   author: User;
+  status: 'Backlog' | 'In Progress' | 'Done';
 }>;
 
 export type Comment = Entity<{

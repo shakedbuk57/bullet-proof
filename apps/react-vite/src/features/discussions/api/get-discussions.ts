@@ -34,9 +34,9 @@ type UseDiscussionsOptions = {
 export const useDiscussions = ({
   queryConfig,
   page,
-}: UseDiscussionsOptions) => {
+}: UseDiscussionsOptions = {}) => {
   return useQuery({
     ...getDiscussionsQueryOptions({ page }),
-    ...queryConfig,
+    ...(queryConfig || {}),
   });
 };
