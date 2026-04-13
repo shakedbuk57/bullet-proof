@@ -42,5 +42,9 @@ export const paths = {
       path: 'profile',
       getHref: () => '/app/profile',
     },
+    organizationSettings: {
+      path: 'organization-settings',
+      getHref: () => '/app/organization-settings',
+    },
   },
 } as const;
