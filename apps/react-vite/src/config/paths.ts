@@ -42,5 +42,9 @@ export const paths = {
       path: 'profile',
       getHref: () => '/app/profile',
     },
+    kanban: {
+      path: 'kanban',
+      getHref: () => '/app/kanban',
+    },
   },
 } as const;
