@@ -48,3 +48,19 @@ export type Comment = Entity<{
   discussionId: string;
   author: User;
 }>;
+
+export type TaskStatus =
+  | 'super-super-backlog'
+  | 'super-backlog'
+  | 'backlog'
+  | 'todo'
+  | 'in-progress'
+  | 'done';
+
+export type Task = Entity<{
+  title: string;
+  description: string;
+  status: TaskStatus;
+  priority: 'low' | 'medium' | 'high';
+  assignee: string;
+}>;
