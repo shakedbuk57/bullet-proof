@@ -1,4 +1,11 @@
-import { Home, PanelLeft, Folder, Users, User2 } from 'lucide-react';
+import {
+  Home,
+  PanelLeft,
+  Folder,
+  Users,
+  User2,
+  SquareKanban,
+} from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { NavLink, useNavigate, useNavigation } from 'react-router';
 
@@ -85,6 +92,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const navigation = [
     { name: 'Dashboard', to: paths.app.dashboard.getHref(), icon: Home },
     { name: 'Discussions', to: paths.app.discussions.getHref(), icon: Folder },
+    { name: 'Board', to: paths.app.board.getHref(), icon: SquareKanban },
     checkAccess({ allowedRoles: [ROLES.ADMIN] }) && {
       name: 'Users',
       to: paths.app.users.getHref(),
